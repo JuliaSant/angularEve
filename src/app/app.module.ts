@@ -17,7 +17,8 @@ import { ConvidadosComponent } from './pages/convidados/convidados.component';
 import { EventoComponent } from './pages/evento/evento.component';
 import { FuncionarioComponent } from './pages/funcionario/funcionario.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-
+import { HttpClientModule } from  '@angular/common/http';
+ 
 
 @NgModule({
   declarations: [
@@ -28,10 +29,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ConvidadosComponent,
     EventoComponent,
     FuncionarioComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserAnimationsModule,
+    HttpClientModule,
     RouterModule.forRoot(AppRoutes,{
       useHash: true
     }),

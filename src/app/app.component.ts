@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +9,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent{}
+export class AppComponent implements OnInit {
+  user = {} as User;
+  users: User[];
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.getUsers()
+  }
+
+  saveUser(form: NgForm) {
+    this.userService.saveUser(this.user).subscribe(() => {
+      this.cleanForm(form);
+    });
+  }
+  // Chama o serviço para obtém todos os carros
+  getUsers() {
+    this.userService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+    });
+  }
+
+  // limpa o formulario
+  cleanForm(form: NgForm) {
+    this.getUsers();
+    form.resetForm();
+    this.user = {} as User;
+  }
+}
